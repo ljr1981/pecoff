@@ -6,6 +6,7 @@ note
 		variants can be implemented even in a homogenous system.
 		]"
 	ca_ignoredby : "CA070"
+	EIS: "name=docs", "src=https://www.sqlite.org/docs.html"
 
 class
 	PE_DATA [G -> PE_DATA_SPECS create default_create end]

@@ -135,7 +135,74 @@ feature -- Access
 
 feature {TEST_SET_BRIDGE, PE_DATA} -- Implementation: Access
 
-	machine,
+	machine: INTEGER_64
+			-- See EIS note link and "machine types" table.
+		note
+			EIS: "src=https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#coff-file-header-object-and-image"
+		attribute
+			Result := 0
+		end
+
+	machine_type: TUPLE [code, description: STRING]
+			-- Based on `machine' code.
+		note
+			EIS: "src=https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#coff-file-header-object-and-image"
+		do
+			inspect
+				machine.to_character_32
+			when '%/0x1d3/' then
+				Result := ["IMAGE_FILE_MACHINE_AM33", "Matsushita AM33"]
+			when '%/0x8664/' then
+				Result := ["IMAGE_FILE_MACHINE_AMD64", "x64"]
+			when '%/0x1c0/' then
+				Result := ["IMAGE_FILE_MACHINE_ARM", "ARM little endian"]
+			when '%/0xaa64/' then
+				Result := ["IMAGE_FILE_MACHINE_ARM64", "ARM64 little endian"]
+			when '%/0x1c4/' then
+				Result := ["IMAGE_FILE_MACHINE_ARMNT", "ARM Thumb-2 little endian"]
+			when '%/0xebc/' then
+				Result := ["IMAGE_FILE_MACHINE_EBC", "EFI byte code"]
+			when '%/0x14c/' then
+				Result := ["IMAGE_FILE_MACHINE_I386", "Intel 386 or later processors and compatible processors"]
+			when '%/0x200/' then
+				Result := ["IMAGE_FILE_MACHINE_IA64", "Intel Itanium processor family"]
+			when '%/0x9041/' then
+				Result := ["IMAGE_FILE_MACHINE_M32R", "Mitsubishi M32R little endian"]
+			when '%/0x266/' then
+				Result := ["IMAGE_FILE_MACHINE_MIPS16", "MIPS16"]
+			when '%/0x366/' then
+				Result := ["IMAGE_FILE_MACHINE_MIPSFPU", "MIPS with FPU"]
+			when '%/0x466/' then
+				Result := ["IMAGE_FILE_MACHINE_MIPSFPU16", "MIPS16 with FPU"]
+			when '%/0x1f0/' then
+				Result := ["IMAGE_FILE_MACHINE_POWERPC", "Power PC little endian"]
+			when '%/0x1f1/' then
+				Result := ["IMAGE_FILE_MACHINE_POWERPCFP", "Power PC with floating point support"]
+			when '%/0x166/' then
+				Result := ["IMAGE_FILE_MACHINE_R4000", "MIPS little endian"]
+			when '%/0x5032/' then
+				Result := ["IMAGE_FILE_MACHINE_RISCV32", "RISC-V 32-bit address space"]
+			when '%/0x5064/' then
+				Result := ["IMAGE_FILE_MACHINE_RISCV64", "RISC-V 64-bit address space"]
+			when '%/0x5128/' then
+				Result := ["IMAGE_FILE_MACHINE_RISCV128", "RISC-V 128-bit address space"]
+			when '%/0x1a2/' then
+				Result := ["IMAGE_FILE_MACHINE_SH3", "Hitachi SH3"]
+			when '%/0x1a3/' then
+				Result := ["IMAGE_FILE_MACHINE_SH3DSP", "Hitachi SH3 DSP"]
+			when '%/0x1a6/' then
+				Result := ["IMAGE_FILE_MACHINE_SH4", "Hitachi SH4"]
+			when '%/0x1a8/' then
+				Result := ["IMAGE_FILE_MACHINE_SH5", "Hitachi SH5"]
+			when '%/0x1c2/' then
+				Result := ["IMAGE_FILE_MACHINE_THUMB", "Thumb"]
+			when '%/0x169/' then
+				Result := ["IMAGE_FILE_MACHINE_WCEMIPSV2", "MIPS little-endian WCE v2"]
+			else
+				Result := ["IMAGE_FILE_MACHINE_UNKNOWN", "The contents of this field are assumed to be applicable to any machine type"]
+			end
+		end
+
 	sections,
 	time_date,
 	size,
