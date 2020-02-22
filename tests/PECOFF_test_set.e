@@ -25,7 +25,7 @@ inherit
 feature -- Test routines
 
 	pecoff_data_tests
-			--
+			-- Loading a local test pecoff.sqlite3 file with some test data.
 		local
 			l_data: PE_DATA [PE_DATA_SPECS]
 			l_image: PE_IMAGE_FILE

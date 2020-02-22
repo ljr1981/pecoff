@@ -1,6 +1,7 @@
 ﻿note
 	description: "Microsoft Windows-based Image File (exe, dll, lib, obj)"
 	EIS: "name=microsoft_pecoff", "src=https://wiki.osdev.org/PE"
+	todo: "Make Current createable from a SQLite3 entry"
 
 class
 	PE_IMAGE_FILE
