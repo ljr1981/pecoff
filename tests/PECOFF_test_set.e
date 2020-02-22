@@ -1,6 +1,7 @@
 ﻿note
 	description: "Tests of {PECOFF}."
 	testing: "type/manual"
+	EIS: "name=readme", "src=README.md", "protocol=text"
 
 class
 	PECOFF_TEST_SET
