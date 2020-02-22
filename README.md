@@ -17,3 +17,6 @@ The creation procedure will load the file and process it, determining first if t
 If the file is a PE image, then the COFF header will be located and parsed, its values (some of them) will be set in the appropriate data features of the object.
 
 Note that there will also be some information stored about the file based on the MS Windoows file system that is not taken directly from the PE COFF header, but is generalized FILE_INFO of interest. The PE_DATA class will store some of this information for your convenience to be used for SQL SELECT queries later on as you have need.
+
+## KNOWN POSSIBLE ISSUES
+It is not yet substantially proven through examples and testing that this code is reading x64-bit PE COFF headers correctly. Some testing seems to indicate that it is, but a more precise understanding of the specifications must be brought to bear and then the code aligned (if it is not already). Any capacity to properly handle x64-bit images still feels somewhat accidental rather than precise.
